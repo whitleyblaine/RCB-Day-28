@@ -5,10 +5,25 @@ function Character(options) {
   this.age = options.age;
   this.strength = options.strength;
   this.hp = options.hp;
-  this.printStats = options.printStats;
-  this.isAlive = options.isAlive;
-  this.attack = options.attack;
-  this.levelUp = options.levelUp;
+  this.printStats = function() {console.log("Name: " + this.name + ", Profession: " + this.profession + ", Gender: " + this.gender + ", Age: " + this.age + ", Strength: " + this.strength + ", HitPoints: " + this.hp)};
+  this.isAlive = function(){
+    if(this.hp > 0) {
+      console.log(this.name + " is alive!");
+    } else {
+      console.log(this.name + " is dead...");
+    }
+  },
+  this.attack = function(victim) {
+    victim.hp = victim.hp - this.strength;
+    console.log(this.name + " attacked " + victim.name);
+    console.log(victim.name + " now has " + victim.hp + ' hit points!');
+  },
+  this.levelUp = function() {
+    this.age++;
+    this.strength = this.strength + 5;
+    this.hp = this.hp + 25;
+    console.log(this.name + " has leveled up");
+  }
 }
 
 var billy = new Character({
@@ -18,20 +33,7 @@ var billy = new Character({
   age: 24,
   strength: 7,
   hp: 2,
-  printStats: function() {console.log("Name: " + this.name + ", Profession: " + this.profession + ", Gender: " + this.gender + ", Age: " + this.age + ", Strength: " + this.strength + ", HitPoints: " + this.hp)},
-  isAlive: function(){
-    if(this.hp > 0) {
-      console.log(this.name + " is alive!");
-    } else {
-      console.log(this.name + " is dead...");
-    }
-  },
-  attack: function(char2) {
-    char2.hp = char2.hp - this.strength;
-    console.log(this.name + " attacked " + char2.name);
-    console.log(char2.name + " now has " + char2.hp + ' hit points!');
-  }
-});
+})
 
 
 var sarah = new Character({
@@ -41,26 +43,14 @@ var sarah = new Character({
   age: 21,
   strength: 5,
   hp: 1,
-  printStats: function(){console.log("Name: " + this.name + ", Profession: " + this.profession + ", Gender: " + this.gender + ", Age: " + this.age + ", Strength: " + this.strength + ", HitPoints: " + this.hp)},
-  isAlive: function(){
-    if(this.hp > 0) {
-      console.log(this.name + " is alive!");
-    } else {
-      console.log(this.name + " is dead...");
-    }
-  },
-  attack: function(char2) {
-    char2.hp = char2.hp - this.strength;
-    console.log(this.name + " attacked " + char2.name);
-    console.log(char2.name + " now has " + char2.hp + ' hit points!');
-  }
-
 })
 
 billy.printStats();
 sarah.printStats();
 billy.isAlive();
 sarah.attack(billy);
+billy.isAlive();
+billy.levelUp();
 billy.isAlive();
 
 
